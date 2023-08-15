@@ -97,35 +97,53 @@ export default function App() {
 
   return (
     <>
-      <div className='d-flex'>
-        <div>
-          <div>{friendsElements}</div>
-          <button onClick={() => setToggle(!toggle)}>Add Friend </button>
-          {toggle ? (
-            <div className='border d-flex gap-3 p-2 align-items-center  '>
-              <div>
-                <label>Friend name</label>
-                <input
-                  onChange={handleChange}
-                  className='form-input'
-                  type='text'
-                  placeholder='item...'
-                ></input>
+      <div className='row '>
+        <div className=' col custom-width-container'>
+          <div className='d-flex flex-column gap-3'>{friendsElements}</div>
+          <div className='m-3 d-flex justify-content-end'>
+            <button
+              className='btn btn-success '
+              onClick={() => setToggle(!toggle)}
+            >
+              Add Friend{" "}
+            </button>
+          </div>
+          <div>
+            {toggle ? (
+              <div className='border d-flex gap-1 p-3 align-items-center rounded-3 '>
+                <div className='d-flex gap-2 align-items-center'>
+                  <label className='fw-bold'>Friend name</label>
+                  <input
+                    onChange={handleChange}
+                    className='form-control custom-width-input'
+                    type='text'
+                  ></input>
+                </div>
+                <div>
+                  <button
+                    onClick={addFriend}
+                    className='btn btn-warning fw-bold'
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
-              <button onClick={addFriend}>Add</button>
-            </div>
-          ) : (
-            ""
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className='col custom-width-container'>
+          {selected && (
+            <SplitForm
+              selectedfriend={selectedfriend}
+              handleForm={handleForm}
+              splitForm={splitForm}
+              splitBill={splitBill}
+              key={selectedfriend.id}
+            />
           )}
         </div>
-        {selected && (
-          <SplitForm
-            selectedfriend={selectedfriend}
-            handleForm={handleForm}
-            splitForm={splitForm}
-            splitBill={splitBill}
-          />
-        )}
       </div>
     </>
   );
